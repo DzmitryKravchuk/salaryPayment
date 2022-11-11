@@ -15,7 +15,6 @@ import org.springframework.data.relational.core.mapping.Table;
 @EqualsAndHashCode(callSuper = true)
 public class Division extends AbstractEntity {
 
-    @EqualsAndHashCode.Exclude
     private String code;
 
     @EqualsAndHashCode.Exclude
