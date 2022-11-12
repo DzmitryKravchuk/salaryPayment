@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -51,11 +50,11 @@ public class UserServiceImpl implements UserService {
         if (Objects.isNull(u)) {
             throw new UsernameNotFoundException(String.format("User %s is not found", login));
         }
-        return new org.springframework.security.core.userdetails.User(u.getLogin(), u.getPassword(), true, true, true, true, new HashSet<>());
+        return new org.springframework.security.core.userdetails.User(u.getLogin(), u.getPassword(), true, true, true, true, getAuthorities());
     }
 
     // By default, user has only one role ROLE_USER
     private Set<GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+        return Collections.singleton(new SimpleGrantedAuthority("USER"));
     }
 }

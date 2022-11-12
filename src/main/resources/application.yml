@@ -3,7 +3,7 @@ server:
 ---
 spring:
   datasource:
-    db-name: salaryPayment
+    db-name: salary
     host: localhost
     port: 5432
     url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.db-name}
@@ -12,7 +12,5 @@ spring:
     driver-class-name: org.postgresql.Driver
   sql:
     init:
+      mode: always # remove it after LiquiBase/ Flyway implemented
       encoding: UTF-8
----
-jwt:
-  secret: springrest

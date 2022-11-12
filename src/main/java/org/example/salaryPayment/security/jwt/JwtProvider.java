@@ -1,20 +1,12 @@
 package org.example.salaryPayment.security.jwt;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.web.csrf.CsrfToken;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
-import org.springframework.security.web.csrf.DefaultCsrfToken;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
-import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.security.Key;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Base64;
@@ -24,8 +16,9 @@ import java.util.UUID;
 @Component
 public class JwtProvider {
 
-    @Value("$(jwt.secret)")
-    private String secret;
+    private static final String secret = "asdfSFS34wfsdfsdfSDSD32dfsddDDerQSNCK34SOWEK5354fdgdf4";
+    private static final Key hmacKey = new SecretKeySpec(Base64.getDecoder().decode(secret),
+            SignatureAlgorithm.HS256.getJcaName());
 
     public String generateToken(String login) {
         var id = UUID.randomUUID().toString().replace("-", "");
@@ -33,19 +26,20 @@ public class JwtProvider {
         var exp = Date.from(LocalDateTime.now().plusHours(24)
                 .atZone(ZoneId.systemDefault()).toInstant());
 
-        return  Jwts.builder()
-                    .setId(id)
-                    .setIssuedAt(now)
-                    .setNotBefore(now)
-                    .setExpiration(exp)
-                    .signWith(getSecretKey())
-                    .compact();
+        return Jwts.builder()
+                .setId(id)
+                .setIssuedAt(now)
+                .setNotBefore(now)
+                .setExpiration(exp)
+                .setSubject(login)
+                .signWith(hmacKey)
+                .compact();
     }
 
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder()
-                    .setSigningKey(getSecretKey())
+                    .setSigningKey(hmacKey)
                     .build()
                     .parseClaimsJws(token);
             return true;
@@ -57,14 +51,10 @@ public class JwtProvider {
 
     public String getLoginFromToken(String token) {
         Claims claims = Jwts.parserBuilder()
-                .setSigningKey(getSecretKey())
+                .setSigningKey(hmacKey)
                 .build()
                 .parseClaimsJws(token).getBody();
         return claims.getSubject();
     }
 
-    private SecretKey getSecretKey() {
-        byte[] decodedKey = Base64.getDecoder().decode(this.secret);
-        return new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
-    }
 }

@@ -16,4 +16,5 @@ public class AbstractPersistenceTest {
 
     @Autowired
     protected UserRepository userRepository;
+
 }
