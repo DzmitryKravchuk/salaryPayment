@@ -14,7 +14,6 @@ public class AbstractPersistenceTest {
     @Autowired
     protected EmployeeRepository employeeRepository;
 
-
-
-
+    @Autowired
+    protected UserRepository userRepository;
 }

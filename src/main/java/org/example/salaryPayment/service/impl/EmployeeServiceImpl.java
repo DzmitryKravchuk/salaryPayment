@@ -8,12 +8,14 @@ import org.example.salaryPayment.persistence.entity.Employee;
 import org.example.salaryPayment.persistence.repositoty.EmployeeRepository;
 import org.example.salaryPayment.service.EmployeeService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository repository;
@@ -25,6 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Employee getById(Long id) {
         log.info("EmployeeServiceImpl get by id: {}", id);
         return repository.findById(id).
@@ -32,6 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Employee> getAll() {
         log.info("EmployeeServiceImpl find ALL");
         return (List<Employee>) repository.findAll();

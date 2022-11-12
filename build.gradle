@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'org.springframework.boot' version '2.5.6'
+    id 'org.springframework.boot' version '2.7.5'
 }
 
 group 'org.example'
@@ -19,8 +19,12 @@ dependencies {
     testAnnotationProcessor "org.projectlombok:lombok"
     //      Spring
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
+    //      JWT
+    //implementation 'org.springframework.security:spring-security-web:5.7.3'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
 
     //      Database
     runtimeOnly 'org.postgresql:postgresql'
