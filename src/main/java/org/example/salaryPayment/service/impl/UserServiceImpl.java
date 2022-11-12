@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public User getByLogin(String login) {
-        log.info("UserServiceImpl get by login: {}", login);
+        log.info("getByLogin: {}", login);
         return repository.findByLogin(login).
                 orElseThrow(() -> new ResourceNotFoundException("User with login " + login + " not found"));
     }

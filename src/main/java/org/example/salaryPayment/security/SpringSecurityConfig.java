@@ -27,7 +27,7 @@ public class SpringSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/user/*").hasRole("USER")
+                .antMatchers("/user/*").hasAuthority("USER")
                 .antMatchers("/auth/login").anonymous()
                 .and()
                 .addFilterBefore(jwtFilter,
