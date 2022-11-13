@@ -3,6 +3,7 @@ package org.example.salaryPayment.controller.handler;
 import lombok.extern.slf4j.Slf4j;
 import org.example.salaryPayment.exception.PasswordIncorrectException;
 import org.example.salaryPayment.exception.ResourceNotFoundException;
+import org.example.salaryPayment.exception.UserNotAuthorisedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,6 +23,12 @@ public class RestExceptionHandler {
     public ResponseEntity<String> handleNotMatchException(RuntimeException e) {
         log.error(e.getMessage(), e);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    @ExceptionHandler(UserNotAuthorisedException.class)
+    public ResponseEntity<String> handleNotAuthorizedException(RuntimeException e) {
+        log.error(e.getMessage(), e);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)

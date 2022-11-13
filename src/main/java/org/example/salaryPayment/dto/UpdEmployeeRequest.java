@@ -14,5 +14,4 @@ public class UpdEmployeeRequest {
 
     private Title title;
 
-    private Long divisionId;
 }

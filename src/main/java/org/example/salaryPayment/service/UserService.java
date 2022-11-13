@@ -11,4 +11,6 @@ public interface UserService extends UserDetailsService {
     User getByLoginAndPassword(String login, String password);
 
     UserDetails loadUserByUsername(String login);
+
+    User getAuthUser();
 }

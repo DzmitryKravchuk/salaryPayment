@@ -14,3 +14,6 @@ spring:
     init:
       mode: always # remove it after LiquiBase/ Flyway implemented
       encoding: UTF-8
+---
+jwt:
+  secret: asdfSFS34wfsdfsdfSDSD32dfsddDDerQSNCK34SOWEK5354fdgdf4

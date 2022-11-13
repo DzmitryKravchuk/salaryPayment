@@ -1,3 +1,8 @@
+DROP TABLE IF EXISTS "user";
+DROP TABLE IF EXISTS "salary_payment";
+DROP TABLE IF EXISTS "employee";
+DROP TABLE IF EXISTS "division";
+
 CREATE TABLE IF NOT EXISTS "division" (
     ID serial NOT NULL,
     CODE varchar(100) NOT NULL UNIQUE,
@@ -39,7 +44,6 @@ CREATE TABLE IF NOT EXISTS "user" (
     DIVISION_ID bigint NOT NULL,
     CONSTRAINT user_pk PRIMARY KEY (ID)
     );
-
 
 ALTER TABLE "employee" ADD CONSTRAINT employee_division_fk0 FOREIGN KEY (DIVISION_ID) REFERENCES "division"(ID);
 

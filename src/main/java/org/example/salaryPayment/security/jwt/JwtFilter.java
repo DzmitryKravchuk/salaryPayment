@@ -1,8 +1,6 @@
 package org.example.salaryPayment.security.jwt;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.example.salaryPayment.persistence.entity.User;
 import org.example.salaryPayment.service.UserService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

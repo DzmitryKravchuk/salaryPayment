@@ -3,6 +3,7 @@ package org.example.salaryPayment.security.jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -15,10 +16,14 @@ import java.util.UUID;
 
 @Component
 public class JwtProvider {
+    @Value("${jwt.secret}")
+    private String secretString;
 
-    private static final String secret = "asdfSFS34wfsdfsdfSDSD32dfsddDDerQSNCK34SOWEK5354fdgdf4";
-    private static final Key hmacKey = new SecretKeySpec(Base64.getDecoder().decode(secret),
-            SignatureAlgorithm.HS256.getJcaName());
+    //private final String secret = "asdfSFS34wfsdfsdfSDSD32dfsddDDerQSNCK34SOWEK5354fdgdf4";
+    private Key getHmacKey() {
+        return new SecretKeySpec(Base64.getDecoder().decode(secretString),
+                SignatureAlgorithm.HS256.getJcaName());
+    }
 
     public String generateToken(String login) {
         var id = UUID.randomUUID().toString().replace("-", "");
@@ -32,14 +37,14 @@ public class JwtProvider {
                 .setNotBefore(now)
                 .setExpiration(exp)
                 .setSubject(login)
-                .signWith(hmacKey)
+                .signWith(getHmacKey())
                 .compact();
     }
 
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder()
-                    .setSigningKey(hmacKey)
+                    .setSigningKey(getHmacKey())
                     .build()
                     .parseClaimsJws(token);
             return true;
@@ -51,7 +56,7 @@ public class JwtProvider {
 
     public String getLoginFromToken(String token) {
         Claims claims = Jwts.parserBuilder()
-                .setSigningKey(hmacKey)
+                .setSigningKey(getHmacKey())
                 .build()
                 .parseClaimsJws(token).getBody();
         return claims.getSubject();
