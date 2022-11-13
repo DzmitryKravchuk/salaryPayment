@@ -2,7 +2,7 @@ package org.example.salaryPayment.persistence.repositoty;
 
 import org.assertj.core.api.SoftAssertions;
 import org.example.salaryPayment.exception.ResourceNotFoundException;
-import org.example.salaryPayment.persistence.entity.Title;
+import org.example.salaryPayment.enums.Title;
 import org.junit.jupiter.api.Test;
 
 import java.util.stream.Collectors;

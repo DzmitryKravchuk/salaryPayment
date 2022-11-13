@@ -1,4 +1,4 @@
-package org.example.salaryPayment.persistence.entity;
+package org.example.salaryPayment.enums;
 
 public enum Title {
     JUNIOR,

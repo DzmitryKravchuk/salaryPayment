@@ -1,7 +1,7 @@
 package org.example.salaryPayment.dto;
 
 import lombok.Data;
-import org.example.salaryPayment.persistence.entity.Title;
+import org.example.salaryPayment.enums.Title;
 
 @Data
 public class EmployeeDivisionModel {

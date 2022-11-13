@@ -4,4 +4,6 @@ import org.example.salaryPayment.persistence.entity.Division;
 
 public interface DivisionService {
     Division getByCode (String code);
+
+    Division getById(Long divisionId);
 }
