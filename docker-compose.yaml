@@ -13,7 +13,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - "d-base:/var/lib/postgresql/data"
+      - d-base:/var/lib/postgresql/data
   app:
     build:
       context: .

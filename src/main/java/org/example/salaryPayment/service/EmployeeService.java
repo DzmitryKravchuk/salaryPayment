@@ -1,17 +1,19 @@
 package org.example.salaryPayment.service;
 
+import org.example.salaryPayment.dto.EmployeeDivisionModel;
+import org.example.salaryPayment.dto.UpdEmployeeRequest;
 import org.example.salaryPayment.persistence.entity.Employee;
 
 import java.util.List;
 
 public interface EmployeeService {
-    void save(Employee employee);
+    void save(UpdEmployeeRequest employee);
 
-    Employee getById(Long id);
+    EmployeeDivisionModel getById(Long id);
 
-    List<Employee> getAll();
+    List<EmployeeDivisionModel> getAll();
 
     void delete(Long id);
 
-    void update(Employee employee, Long id);
+    void update(UpdEmployeeRequest employee, Long id);
 }

@@ -1,15 +1,9 @@
 package org.example.salaryPayment.persistence.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@EqualsAndHashCode(of = "id")
+@Data
 public class AbstractEntity {
     @Id
     protected Long id;
